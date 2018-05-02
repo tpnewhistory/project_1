@@ -10,7 +10,7 @@ library(scales)
 library(DT)
 
 #setwd("~/Desktop/git_proj/Anthony_Parrillo_Shiny_Project")
-turnstileinfo = read.table('NYC_Transit/turnstile_160109.txt', header = TRUE, sep = ",")
+turnstileinfo = read.table('turnstile_160109.txt', header = TRUE, sep = ",")
 
 recordMonth = 1
 recordDate = 9
@@ -39,7 +39,7 @@ while (recordMonth != 7) { #Records in all of the text files from 160109 to 1607
   
   MonthString = as.character(recordMonth)
   
-  FileToOpenName = paste0('NYC_Transit/turnstile_160', MonthString, DateString, '.txt')
+  FileToOpenName = paste0('turnstile_160', MonthString, DateString, '.txt')
   NewData = read.table(FileToOpenName, header = TRUE, sep = ',')
   turnstileinfo = rbind(turnstileinfo, NewData) #adds new dataset as rows underneath previous data set
 }
@@ -69,7 +69,7 @@ daytotals = ent %>% group_by(DATE) %>% summarise(DAYTOTAL = sum(TOTAL))
 
 stationtotals = ent %>% group_by(STATION, LINENAME) %>% summarise(TOTAL6MONTHS = sum(TOTAL)) %>% arrange(desc(TOTAL6MONTHS))
 
-MTAStationLocationsorig = read.csv('NYC_Transit/MTA_StationLocations.csv', header = TRUE)
+MTAStationLocationsorig = read.csv('MTA_StationLocations.csv', header = TRUE)
 #Filter out Staten Island Trains(there were none in the data set)
 MTAStationLocations = MTAStationLocationsorig %>% filter(Borough != 'SI')
 
